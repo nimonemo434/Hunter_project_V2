@@ -62,3 +62,5 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 
 아직 미숙하고 배운 기간이 짧아 결과물 또한 만족스럽진 못하지만 게임 코딩을 배우려면 다이렉트3D는 필수로 배워야 한다는 강사님들의 조언에 따라 언젠가 시간이 된다면 좀더 공부할 생각입니다.
 ## 유니티 - 사냥꾼의 꿈
+![city](https://user-images.githubusercontent.com/109446732/212501407-fc74dd8b-eee8-4325-8238-b60ca5fc6e05.png)
+![world](https://user-images.githubusercontent.com/109446732/212501408-d0ef0563-6d9d-4e0e-92c0-731ae7471a35.png)
