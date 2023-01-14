@@ -38,4 +38,6 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 
 기본적인 방향키 와 wasd 로 이동이 가능하며 넘버키 4856 으로 방향 전환이 가능합니다.
 ### 실행 영상
+
+![D3D_play](https://user-images.githubusercontent.com/109446732/212500636-b931c40e-681d-4189-9cc4-957a8868e22e.gif)
 ## 유니티 - 사냥꾼의 꿈
