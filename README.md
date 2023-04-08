@@ -84,3 +84,10 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 그렇게 얻은 자본으로 무기를 구매하여 능력을 향상시키거나 엔딩을 위한 집 구매가 최종 목표입니다.
 
 Horizontal 및 Vertical을 사용하여 w, a, s, d 와 화살표를 이용한 움직임을 구현하고 스페이스바 입력시 점프 할수 있도록 만들었습니다.
+
+무거운 rigidbody 대신 가벼운 character controller 를 사용하고 중력은 코드로 따로 구현하였습니다.
+
+캐릭터는 Mouse X 를 통해서 받은 값을 transform.eulerAngles 통해 좌우로 제한없이 움직이며 카메라는 Mouse X 와 Mouse Y를 통한 값을 동일한 방법으로 받아 상하좌우로 움직이며
+상하는 90도의 제한을 두었습니다.
+
+카메라는 플레이어와 떨어져 있지만 플레이어 안에 빈 오브젝트로 카메라가 이동하도록 transform.position을 사용하였습니다.
