@@ -102,7 +102,8 @@ wasd 와 기본적인 방향키로 움직이며 마우스의 움직임에 따라
 공격은 마우스 왼쪽으로 일직선적인 공격, 오른쪽으로 슈루탄을 던집니다.
 
 ### 실행 영상
-![스크린 캡처_20230408_155202](https://user-images.githubusercontent.com/109446732/230708625-720b0b24-63bd-4dca-b0da-4febf3160f95.gif)
+![스크린 캡처_20230408_162743](https://user-images.githubusercontent.com/109446732/230709277-28fae9b4-03e0-4272-936a-b1aa54a54688.gif)
+![스크린 캡처_20230408_162717](https://user-images.githubusercontent.com/109446732/230709281-1fb83b67-b7f4-4d97-b9ba-0db5f2b0f47a.gif)
 ### 진행 상황 및 문제점
 
 현재 기본적인 움직임과 간단한 공격및 맵구현만 되어있는 상태입니다.
