@@ -31,6 +31,9 @@ public class EnemyFSM : MonoBehaviour
 
     public float moveDistance = 20f;
 
+    public int hp = 15;
+    int maxHp = 15;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +79,13 @@ public class EnemyFSM : MonoBehaviour
 
         void Move()
         {
-            if(Vector3.Distance(transform.position, player.position) > attackDistance)
+            if (Vector3.Distance(transform.position, originPos) > moveDistance)
+            {
+                m_State = EnemyState.Return;
+                print("상태 전환: Move -> Return");
+            }
+
+            else if (Vector3.Distance(transform.position, player.position) > attackDistance)
             {
                 Vector3 dir = (player.position - transform.position).normalized;
                 cc.Move(dir*moveSpeed*Time.deltaTime);
@@ -112,7 +121,18 @@ public class EnemyFSM : MonoBehaviour
 
         void Return()
         {
-
+            if(Vector3.Distance(transform.position, originPos) > 0.1f)
+            {
+                Vector3 dir = (originPos - transform.position).normalized;
+                cc.Move(dir * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = originPos;
+                hp = maxHp;
+                m_State = EnemyState.Idle;
+                print("상태 전환: Return -> Idle");
+            }
         }
 
         void Damaged()
