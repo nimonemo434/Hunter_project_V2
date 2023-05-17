@@ -30886,6 +30886,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8229747168125959503, guid: 95bf26cdfd510b1439e1306625051240, type: 3}
   m_PrefabInstance: {fileID: 1575567749}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1578279045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1555847620765010, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+  m_PrefabInstance: {fileID: 2066734017}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1578279053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578279045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e094c50e5fae5f45add8884c1da9c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  findDistance: 8
 --- !u!4 &1585256554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3643495135178654224, guid: 3f12c5aeffadbfb48a73664c32368166, type: 3}
@@ -40727,7 +40745,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1555847620765010, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
       propertyPath: m_Name
-      value: Wolf Grey
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4092247331235762, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
       propertyPath: m_RootOrder
@@ -40773,7 +40791,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 195879434793580014, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+    - {fileID: 114891851917860678, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+    - {fileID: 82399463388659280, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+    - {fileID: 114905693314452548, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
 --- !u!1001 &2071070745
 PrefabInstance:

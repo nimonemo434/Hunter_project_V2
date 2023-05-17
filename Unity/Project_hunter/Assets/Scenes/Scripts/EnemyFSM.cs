@@ -18,11 +18,26 @@ public class EnemyFSM : MonoBehaviour
     public float findDistance = 8f;
     Transform player;
 
+    public float attackDistance = 2f;
+    public float moveSpeed = 5f;
+    CharacterController cc;
+
+    float currentTime = 0;
+    float attackDelay = 2f;
+
+    public int attackPower = 3;
+
+    Vector3 originPos;
+
+    public float moveDistance = 20f;
+
     // Start is called before the first frame update
     void Start()
     {
         m_State = EnemyState.Idle;
         player = GameObject.Find("Player").transform;
+        cc = GetComponent<CharacterController>();
+        originPos = transform.position;
     }
 
     // Update is called once per frame
@@ -52,17 +67,47 @@ public class EnemyFSM : MonoBehaviour
 
         void Idle()
         {
-
+            if(Vector3.Distance(transform.position, player.position) < findDistance)
+            {
+                m_State=EnemyState.Move;
+                print("상태 전환: Idle -> Move");
+            }
         }
 
         void Move()
         {
+            if(Vector3.Distance(transform.position, player.position) > attackDistance)
+            {
+                Vector3 dir = (player.position - transform.position).normalized;
+                cc.Move(dir*moveSpeed*Time.deltaTime);
+            }
+            else
+            {
+                m_State = EnemyState.Attack;
+                print("상태 전환: Move -> Attack");
 
+                currentTime = attackDelay;
+            }
         }
 
         void Attack()
         {
-
+            if (Vector3.Distance(transform.position, player.position) < attackDistance)
+            {
+                currentTime += Time.deltaTime;
+                if (currentTime > attackDelay)
+                {
+                    player.GetComponent<PlayerMove>().DamageAction(attackPower);
+                    print("공격");
+                    currentTime = 0;
+                }
+            }
+            else
+            {
+                m_State = EnemyState.Move;
+                print("상태 전환: Attack -> Move");
+                currentTime = 0;
+            }
         }
 
         void Return()

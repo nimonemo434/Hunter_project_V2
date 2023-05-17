@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     public float yVelocity = 0;
     public float jumpPower = 3f;
     public bool isJumping = false;
+    public int hp = 20;
 
     private void Start()
     {
@@ -47,5 +48,10 @@ public class PlayerMove : MonoBehaviour
         dir.y = yVelocity;
 
         cc.Move(dir * moveSpeed * Time.deltaTime);
+    }
+
+    public void DamageAction(int damage)
+    {
+        hp -= damage;
     }
 }
