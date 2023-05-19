@@ -125,13 +125,15 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 공격을 2가지 형태로 구현되어 있습니다.
 
-먼저 던지는 형태 슈루탄 공격의 경우 충돌시(OnCollisionEnter)에 제거(Destroy)되며 충돌 된 위치(transform.position)에 이펙트가 생성(Instantiate) 되게끔 하였습니다.
+먼저 던지는 형태의 슈루탄 공격은 마우스 오른쪽(GetMouseButtonDown(1))을 입력시 던져지며 발사위치(firePosition)는 생성 위치와 동일합니다.
+
+또한 슈루탄은 Rigidbody를 사용하여 중력의 영향을 받고 카메라의 정면(Camera.main.transform.forward)으로 일정 값의 힘을 순간적(ForceMode.Impulse)으로 적용(AddForce)받아 포물선을 그리며 나아갑니다.
+
+충돌시(OnCollisionEnter)에 제거(Destroy)되며 충돌 된 위치(transform.position)에 이펙트가 생성(Instantiate) 되게끔 하였습니다.
 
 이펙트는 정해진 시간 값을 경과된 시간(Time.deltaTime) 값이 넘어갈 경우 삭제(Destroy) 되도록 설정 했습니다.
 
-슈루탄은 마우스 오른쪽(GetMouseButtonDown(1))을 입력시 던져지며 발사위치(firePosition)는 생성 위치와 동일합니다.
-
-또한 슈루탄은 Rigidbody를 사용하여 중력의 영향을 받고 카메라의 정면(Camera.main.transform.forward)으로 일정 값의 힘을 순간적(ForceMode.Impulse)으로 적용(AddForce)받아 포물선을 그리며 나아갑니다.
+다음은 직선의 발사공격 이며
 
 ----
 
