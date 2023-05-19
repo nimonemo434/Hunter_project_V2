@@ -121,7 +121,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 ![스크린 캡처_20230519_145443](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/9d6f1f63-8015-47e7-9289-264fae7e3ac2)
 
-#### 공격 구현
+#### < 공격 >
 
 마우스 왼쪽 버튼은 ray 와 raycastHit를 활용한 일직선인 공격을 구현하였고 마우스 오른쪽 버튼은 rigidbody를 통한 중력의 영향을 받는 던지는 형태의 공격을 만들었습니다.
 
@@ -131,7 +131,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 ![스크린 캡처_20230519_151139](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/7763ddb3-6f14-4d21-9e64-dd97697b71ed)
 
-#### 적 구현
+#### < 적 >
 
 ----
 
