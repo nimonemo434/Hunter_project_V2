@@ -32,7 +32,6 @@ public class EnemyFSM : MonoBehaviour
     public float moveDistance = 20f;
 
     public int hp = 15;
-    int maxHp = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +45,7 @@ public class EnemyFSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(m_State)
+        switch (m_State)
         {
             case EnemyState.Idle:
                 Idle();
@@ -67,82 +66,121 @@ public class EnemyFSM : MonoBehaviour
                 Die();
                 break;
         }
+    }
 
-        void Idle()
+    void Idle()
+    {
+        if (Vector3.Distance(transform.position, player.position) < findDistance)
         {
-            if(Vector3.Distance(transform.position, player.position) < findDistance)
-            {
-                m_State=EnemyState.Move;
-                print("상태 전환: Idle -> Move");
-            }
+            m_State = EnemyState.Move;
+            print("상태 전환: Idle -> Move");
+        }
+    }
+
+
+    void Move()
+    {
+        if (Vector3.Distance(transform.position, originPos) > moveDistance)
+        {
+            m_State = EnemyState.Return;
+            print("상태 전환: Move -> Return");
         }
 
-        void Move()
+        else if (Vector3.Distance(transform.position, player.position) > attackDistance)
         {
-            if (Vector3.Distance(transform.position, originPos) > moveDistance)
-            {
-                m_State = EnemyState.Return;
-                print("상태 전환: Move -> Return");
-            }
-
-            else if (Vector3.Distance(transform.position, player.position) > attackDistance)
-            {
-                Vector3 dir = (player.position - transform.position).normalized;
-                cc.Move(dir*moveSpeed*Time.deltaTime);
-            }
-            else
-            {
-                m_State = EnemyState.Attack;
-                print("상태 전환: Move -> Attack");
-
-                currentTime = attackDelay;
-            }
+            Vector3 dir = (player.position - transform.position).normalized;
+            cc.Move(dir * moveSpeed * Time.deltaTime);
         }
-
-        void Attack()
+        else
         {
-            if (Vector3.Distance(transform.position, player.position) < attackDistance)
+            m_State = EnemyState.Attack;
+            print("상태 전환: Move -> Attack");
+
+            currentTime = attackDelay;
+        }
+    }
+
+    void Attack()
+    {
+        if (Vector3.Distance(transform.position, player.position) < attackDistance)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > attackDelay)
             {
-                currentTime += Time.deltaTime;
-                if (currentTime > attackDelay)
-                {
-                    player.GetComponent<PlayerMove>().DamageAction(attackPower);
-                    print("공격");
-                    currentTime = 0;
-                }
-            }
-            else
-            {
-                m_State = EnemyState.Move;
-                print("상태 전환: Attack -> Move");
+                player.GetComponent<PlayerMove>().DamageAction(attackPower);
+                print("공격");
                 currentTime = 0;
             }
         }
-
-        void Return()
+        else
         {
-            if(Vector3.Distance(transform.position, originPos) > 0.1f)
-            {
-                Vector3 dir = (originPos - transform.position).normalized;
-                cc.Move(dir * moveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.position = originPos;
-                hp = maxHp;
-                m_State = EnemyState.Idle;
-                print("상태 전환: Return -> Idle");
-            }
+            m_State = EnemyState.Move;
+            print("상태 전환: Attack -> Move");
+            currentTime = 0;
+        }
+    }
+
+    void Return()
+    {
+        if (Vector3.Distance(transform.position, originPos) > 0.1f)
+        {
+            Vector3 dir = (originPos - transform.position).normalized;
+            cc.Move(dir * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = originPos;
+            m_State = EnemyState.Idle;
+            print("상태 전환: Return -> Idle");
+        }
+    }
+
+    public void HitEnemy(int hitPower)
+    {
+        if(m_State == EnemyState.Damaged || m_State == EnemyState.Die || m_State == EnemyState.Return)
+        {
+            return;
         }
 
-        void Damaged()
+        hp -= hitPower;
+        if (hp > 0)
         {
-
+            m_State = EnemyState.Damaged;
+            print("상태전환: Any state -> Damaged");
+            Damaged();
         }
-
-        void Die()
+        else
         {
-
+            m_State = EnemyState.Die;
+            print("상태전환: Any state -> Die");
+            Die();
         }
+    }
+
+    void Damaged()
+    {
+        StartCoroutine(DamageProcess());
+    }
+
+    IEnumerator DamageProcess()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        m_State = EnemyState.Move;
+        print("상태변환: Damaged -> Move");
+    }
+
+    void Die()
+    {
+        StartCoroutine(DieProcess());
+    }
+
+    IEnumerator DieProcess()
+    {
+        cc.enabled = false;
+
+        yield return new WaitForSeconds(2f);
+        print("소멸!");
+        Destroy(gameObject);
     }
 }

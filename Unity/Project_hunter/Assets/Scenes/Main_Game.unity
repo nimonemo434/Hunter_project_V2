@@ -30904,6 +30904,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findDistance: 8
+  attackDistance: 2
+  moveSpeed: 5
+  attackPower: 3
+  moveDistance: 20
+  hp: 15
 --- !u!4 &1585256554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3643495135178654224, guid: 3f12c5aeffadbfb48a73664c32368166, type: 3}
@@ -35162,6 +35167,7 @@ MonoBehaviour:
   yVelocity: 0
   jumpPower: 3
   isJumping: 0
+  hp: 20
 --- !u!114 &1819701310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35209,6 +35215,7 @@ MonoBehaviour:
   bombFactory: {fileID: 6496894830140530000, guid: 9a8b883ac7e038c448c940a928124e4a, type: 3}
   throwPower: 15
   bulletEffect: {fileID: 1866190659}
+  weaponPower: 5
 --- !u!1001 &1821613512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40746,6 +40753,10 @@ PrefabInstance:
     - target: {fileID: 1555847620765010, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555847620765010, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4092247331235762, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
       propertyPath: m_RootOrder
