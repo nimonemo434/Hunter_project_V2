@@ -102,9 +102,9 @@ Horizontal 과 Vertical를 GetAxis함수로 받아서 w, a, s, d 와 화살표�
 이때 시간이 지날수록(Time.deltaTime) 캐릭터의 y축 값을 중력 값(gravity) 만큼 지속적으로 갑소 시켜서 중력을 따로 구현하였고
 y축 값을 지면에 닿아있을때 마다 0으로 초기화 하여 떨어지는 속도가 너무 빨라지지 않도록 하였습니다.
 
-연속 점프 방지를 위해 새로운 조건 값(true,false)을 추가하고 점프를 하려면 지면(CollisionFlags.Below)과 닿아있고 점프값이 비활성화 되어있어야 한다는것을 추가합니다.
-
 rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에는 좀더 가벼운 character controller를 활용해 보기로했습니다.
+
+연속 점프 방지를 위해 새로운 조건 값(true,false)을 추가하고 점프를 하려면 지면(CollisionFlags.Below)과 닿아있고 점프값이 비활성화 되어있어야 한다는것을 추가합니다.
 
 캐릭터는 Mouse X 를 통해서 받은 값을 transform.eulerAngles 통해 좌우로 제한없이 움직이며 카메라는 Mouse X 와 Mouse Y를 통한 값을 동일한 방법으로 받아 상하좌우로 움직이며
 상하는 90도의 제한을 두었습니다.
