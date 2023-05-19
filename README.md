@@ -94,7 +94,7 @@ wasd 와 기본적인 방향키로 움직이며 마우스의 움직임에 따라
 
 ![스크린 캡처_20230519_145400](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/f48e54db-92d4-4139-bba7-93d3af36000c)
 
-### 이동 구현
+### 이동 및 시점 구현
 
 Horizontal 과 Vertical를 GetAxis함수로 받아서 w, a, s, d 와 화살표를 이용한 움직임을 구현하고 jump를 활용하여 스페이스바 입력시 주어진 값(jumpPower)
 을 y축 값에 더하여 떠오르게 만들었습니다.
@@ -107,10 +107,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 연속 점프 방지를 위해 새로운 조건 값(true,false)을 추가하고 점프를 하려면 지면(CollisionFlags.Below)과 닿아있고 점프값이 비활성화 되어있어야 한다는것을 추가합니다.
 
 마우스의 입력값(Mouse X,Mouse Y)을 받아서 회전방향(vector3)을 결정하고 회전한 방향으로 물체가 회전하도록(transform.eulerAngles) 하였습니다.
-이때 Mathf 클래스의 Clamp 함수를 사용하여 상하 회전의 
-
-캐릭터는 Mouse X 를 통해서 받은 값을 transform.eulerAngles 통해 좌우로 제한없이 움직이며 카메라는 Mouse X 와 Mouse Y를 통한 값을 동일한 방법으로 받아 상하좌우로 움직이며
-상하는 90도의 제한을 두었습니다.
+이때 Mathf 클래스의 Clamp 함수를 사용하여 상하 회전의 제한을 두어 일정범위을 넘지 않도록 설정하였습니다.
 
 게임 시작전에 카메라는 플레이어와 떨어져 있지만 플레이어 안에 빈 오브젝트를 생성하고 오브젝트의 좌표로 카메라가 이동하도록(transform.position = target.position) 하였습니다.
 
