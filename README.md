@@ -117,7 +117,7 @@ Horizontal 및 Vertical을 사용하여 w, a, s, d 와 화살표를 이용한 �
 
 ----
 
-
+![스크린 캡처_20230519_151139](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/7763ddb3-6f14-4d21-9e64-dd97697b71ed)
 
 ### 적 구현
 
