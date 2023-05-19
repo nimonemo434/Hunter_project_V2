@@ -131,9 +131,11 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 충돌시(OnCollisionEnter)에 제거(Destroy)되며 충돌 된 위치(transform.position)에 이펙트가 생성(Instantiate) 되게끔 하였습니다.
 
-이펙트는 정해진 시간 값을 경과된 시간(Time.deltaTime) 값이 넘어갈 경우 삭제(Destroy) 되도록 설정 했습니다.
+이펙트는 오브젝트 변수를 새로 추가하고 충돌시 생성후 정해진 시간 값을 경과된 시간(Time.deltaTime) 값이 넘어갈 경우 삭제(Destroy) 되도록 설정 했습니다.
 
 다음은 직선의 발사공격 이며 마우스 왼쪽 버튼(GetMouseButtonDown(0)) 입력시 카메라의 전방(Camera.main.transform.forward)으로 Ray를 생성하여 부딪힌 대상의 정보를 변수에 저장합니다.
+
+만약 Ray가 물체와 충돌한다면 플레이 될 이펙트의 위치를 충돌위치로 이동후 이펙트를 생성합니다.
 
 ----
 
