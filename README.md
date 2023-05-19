@@ -97,9 +97,9 @@ wasd 와 기본적인 방향키로 움직이며 마우스의 움직임에 따라
 ### 이동 구현
 
 Horizontal 과 Vertical를 GetAxis함수로 받아서 w, a, s, d 와 화살표를 이용한 움직임을 구현하고 jump를 활용하여 스페이스바 입력시 주어진 값(jumpPower)
-만큼 떠오르게 만들었습니다.
+을 y축에 더하여 떠오르게 만들었습니다. 이때 시간이 지날수록(Time.deltaTime) 캐릭터의 y축 값을 중력 값(gravity) 만큼 지속적으로 갑소 시켜서 중력을 따로 구현하였습니다.
 
-무거운 rigidbody 대신 가벼운 character controller 를 사용하였고 이때 시간이 지날수록(Time.deltaTime) 캐릭터의 y축 값을 중력 값(gravity) 만큼 지속적으로 갑소 시켜서 중력을 따로 구현하였습니다.
+rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에는 좀더 가벼운 character controller를 활용해 보기로했습니다.
 
 캐릭터는 Mouse X 를 통해서 받은 값을 transform.eulerAngles 통해 좌우로 제한없이 움직이며 카메라는 Mouse X 와 Mouse Y를 통한 값을 동일한 방법으로 받아 상하좌우로 움직이며
 상하는 90도의 제한을 두었습니다.
