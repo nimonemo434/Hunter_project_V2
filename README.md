@@ -210,7 +210,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
    
 새로운 코루틴 함수(DamageProcess())를 만들고 피격(Damaged) 함수 내에서 코루틴 함수를 실행합니다.
    
-피격 모션 재생 시간을 주고 이동(Move)으로 상태 전환합니다.
+이후 피격시 모션 재생 시간(yield return new WaitForSeconds())을 주고 이동(Move)으로 상태 전환합니다.
    
 - 죽음(Die)
 
