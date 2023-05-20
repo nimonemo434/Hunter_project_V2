@@ -172,7 +172,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 가장 기본적인 상태로 별다른 액션이나 구현없이 다른 상태에서 복귀후에 적용됩니다.
 
-만약 대기(Idle) 상태중에서 정해진 범위값 안에 플레이어가 감지되면 이동(Move) 으로 상태 전환합니다.
+만약 대기(Idle) 상태중에서 정해진 범위값 안에 플레이어가 감지되면 이동(Move)으로 상태 전환합니다.
 
 - 이동
 
@@ -184,9 +184,11 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 
 - 공격
 
-공격은 플레이어가 범위(attackDistance) 안에 있을때와 밖에 있을때를 두가지 경우로 나누었습니다.
+공격은 플레이어가 범위(attackDistance) 안에 있을때와 밖에 있을때 두가지 경우로 나누었으며 일정한 시간 간격으로 공격하기 위해 누적 시간 변수(currentTime), 공격 딜레이 변수(attackDelay)를 추가합니다.
 
-일정한 시간 간격으로 공격하기 위해 누적 시간 변수(currentTime), 공격 딜레이 변수(attackDelay)를 추가합니다.
+플레이어가 공격 범위 안이라면(Vector3.Distance(transform.position, player.position) < attackDistance) 일정한 공격을 위해 경과 시간을 누적(currentTime += Time.deltaTime)하고 경과 시간이 공격 딜레이를 넘어가면(currentTime > attackDelay) 초기화(currentTime = 0)합니다.
+
+또한 플레이어를 추적할수 있도록 공격 범위를 벗어나면 경과 시간을 초기화하고 이동(Move)으로 상태 전환합니다
 
 - 복귀
 - 피격
