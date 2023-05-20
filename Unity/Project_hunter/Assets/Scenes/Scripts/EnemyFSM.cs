@@ -60,10 +60,10 @@ public class EnemyFSM : MonoBehaviour
                 Return();
                 break;
             case EnemyState.Damaged:
-                Damaged();
+                //Damaged();
                 break;
             case EnemyState.Die:
-                Die();
+                //Die();
                 break;
         }
     }
@@ -171,6 +171,8 @@ public class EnemyFSM : MonoBehaviour
 
     void Die()
     {
+        StopAllCoroutines();
+
         StartCoroutine(DieProcess());
     }
 
