@@ -202,7 +202,7 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
    
 이동 중 위치가 지정 한 범위를 넘어갈 경우 복귀하기 위해 이동(Move) 상태에서 거리를 먼저 체크(Vector3.Distance(transform.position, originPos) > moveDistance)합니다.
    
-적은 현재위치에서 처음위치를 향해(Vector3 dir = (originPos - transform.position).normalized) 일정한 속도(moveSpeed)로 이동하다가 어느정도 위치에 근접할 경우 현재위치를 처음위치로 조정(transform.position = originPos)후 대기(Idle) 상태로 전환합니다.
+적은 현재위치에서 처음위치를 향해(Vector3 dir = (originPos - transform.position).normalized) 일정한 속도(moveSpeed)로 이동하다가 조건식(if)에 따라 어느정도 위치에 근접할 경우 현재위치를 처음위치로 조정(transform.position = originPos)후 대기(Idle) 상태로 전환합니다.
    
 - 피격(Damaged)
 - 죽음(Die)
