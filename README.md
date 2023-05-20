@@ -205,6 +205,9 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 적은 현재위치에서 처음위치를 향해(Vector3 dir = (originPos - transform.position).normalized) 일정한 속도(moveSpeed)로 이동하다가 조건식(if)에 따라 어느정도 위치에 근접할 경우 현재위치를 처음위치로 조정(transform.position = originPos)후 대기(Idle) 상태로 전환합니다.
    
 - 피격(Damaged)
+
+플레이어에게 공격 받으면 적은 피격(Damaged) 상태로 전환합니다.
+   
 - 죽음(Die)
 
 ----
@@ -217,6 +220,8 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 > 시점 변환시 일정 값을 넘어가면 바닥을 내려다보는 현상(transform 컴포넌트의 특성으로 특정값을 넘어가면 자동으로 변환되면서 생기는 현상) - 마우스 회전값 변수에 입력 값을 미리 누적함으로써 해결했습니다.
 
 > 이동에서 공격으로 전환시 기다렸다가 공격하는 현상 - 공격으로 전환할때 누적 시간을 공격 딜레이 시간 부터 시작하게끔 수정(currentTime = attackDelay)
+   
+> Die() 함수에서 StopAllCoroutines() 이후 StartCoroutine(DieProcess()) 가 실행되지 않던 현상 - switch문에서 매 프레임마다 상태 함수가 실행되는걸 주석처리하여 상태 전환시 한번만 실행하도록 수정
 
 ----
 
