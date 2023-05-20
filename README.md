@@ -174,6 +174,11 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
 만약 대기(Idle) 상태중에서 정해진 범위값 안에 플레이어가 감지되면 이동(Move) 으로 상태 전환합니다.
 
 - 이동
+
+플레이어를 감지하고 거리(player.position)가 공격 범위(attackDistance) 밖이라면 플레이어를 향해 이동(Move)합니다.
+이때 적은 캐릭터 콘트롤러(CharacterController)를 이용하여 방향(Vector3), 속도(public float moveSpeed = 5f), 시간(Time.deltaTime) 에 따라 위치가 변합니다.
+그러다 플레이어가 공격 범위 안에 들어오면 공격(Attack)으로 상태 전환합니다.
+
 - 공격
 - 복귀
 - 피격
