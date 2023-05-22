@@ -220,7 +220,13 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
   
 플레이어의 스크립트에서 레이 캐스트 발시 적의 레이어를 식별하는 조건식(hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))을 만들고 적 스크립트 컴포넌트(EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>())를 가져와 데미지 실행 함수(eFSM.HitEnemy(weaponPower))를 실행하는 코드를 추가합니다.
    
+이후 적의 체력이 0이하로 내려가면 죽음(Die)으로 상태 전환하며 적이 죽음(Die) 상태일때는 피격 이벤트 발생하지 않도록 간단한 조건문 또한 추가했습니다.
+   
 - 죽음(Die)
+   
+적의 체력이 0이하로 내려가면 죽음(Die)으로 상태 전환합니다. 이때 다른 코르틴은 모두 종료(StopAllCoroutines())하여 피격 코루틴 함수가 계속되는걸 방지하고 죽음 코루틴 함수를 활성화합니다.
+
+적은 죽음 코루틴 함수내에서 캐릭터 콘트롤러 컴포넌트(cc = GetComponent<CharacterController>())를 비활성화(cc.enabled = false)하며 2초후(yield return new WaitForSeconds(2f)) 소멸(Destroy(gameObject))합니다.
 
 ----
 
