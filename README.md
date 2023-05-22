@@ -11,6 +11,10 @@
    + 유니티 - 사냥꾼의 꿈
       + 소개
       + 조작법
+      + 구현
+        + 이동 및 시점
+        + 공격
+        + 적
       + 실행 영상
       + 진행 상황 및 문제점
 ## 들어가기 전에
@@ -44,14 +48,23 @@
 핵심은 행렬을 이해하고 D3DXMatrixMultiply 함수를 활용한 수많은 경험이 해결에 큰 도움이 되었습니다.
 
 이후에 좀더 개선할수도 있지만 유니티 프로젝트로 넘어가기 위해 일단은 마무리 하였습니다.
+
+----
+
 ### 실행 및 조작법
 
 Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 실행 파일입니다.
 
 기본적인 방향키 와 wasd 로 이동이 가능하며 넘버키 4856 으로 방향 전환이 가능합니다.
+
+----
+
 ### 실행 영상
 
 ![D3D_play](https://user-images.githubusercontent.com/109446732/212500636-b931c40e-681d-4189-9cc4-957a8868e22e.gif)
+
+----
+
 ### 제작 과정 중 문제와 해결법
 
 기본적인 언어체계 c, c++, c# 을 포함해서 API, 다이렉트3D 까지 모든 부분이 난생 처음이라 거의 모든 부분에서 문제가 있었습니다.
@@ -65,6 +78,9 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 > 광원 - 버텍스 버퍼의 들어갈 normal 값을 이해하고 적용하는 법을 배우는데 1주일을 소비했습니다. 주로 인터넷에서 관련 자료를 참고하거나 강사님께 normal 값의 역할에 대해 질문하였습니다.
 
 > 빌보드 - y축 회전행렬은 11, 13, 31, 33번 행렬에 회전값이 들어간다는 부분을 찾는데 시간이 좀 걸렸지만 다른 문제들 보단 빠르게 해결했습니다.
+
+----
+
 ### 마침
 
 유니티와 비교하면 다이렉트3D는 확실히 어려웠습니다.
@@ -72,6 +88,9 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 기본적인 모든것이 준비되어 있던 유니티와 다르게 다이렉트3D는 처음부터 하나하나 스스로 만들어야 했으니까요.
 
 아직 미숙하고 배운 기간이 짧아 결과물 또한 만족스럽진 못하지만 게임 코딩을 배우려면 다이렉트3D는 필수로 배워야 한다는 강사님들의 조언에 따라 언젠가 시간이 된다면 좀더 공부할 생각입니다.
+
+----
+
 ## 유니티 - 사냥꾼의 꿈
 ### 소개
 ![전체 맵](https://user-images.githubusercontent.com/109446732/230705667-2c889450-cd4e-4559-a292-5f3a39f47b1b.png)
@@ -83,27 +102,147 @@ Direct3D 폴더의 play 폴더로 들어가시면 보이는 game.exe 파일이 �
 
 그렇게 얻은 자본으로 무기를 구매하여 능력을 향상시키거나 엔딩을 위한 집 구매가 최종 목표입니다.
 
-Horizontal 및 Vertical을 사용하여 w, a, s, d 와 화살표를 이용한 움직임을 구현하고 스페이스바 입력시 점프 할수 있도록 만들었습니다.
-
-무거운 rigidbody 대신 가벼운 character controller 를 사용하고 중력은 코드로 따로 구현하였습니다.
-
-캐릭터는 Mouse X 를 통해서 받은 값을 transform.eulerAngles 통해 좌우로 제한없이 움직이며 카메라는 Mouse X 와 Mouse Y를 통한 값을 동일한 방법으로 받아 상하좌우로 움직이며
-상하는 90도의 제한을 두었습니다.
-
-카메라는 플레이어와 떨어져 있지만 플레이어 안에 빈 오브젝트로 카메라가 이동하도록 transform.position을 사용하였습니다.
-
-마우스 왼쪽 버튼은 ray 와 raycastHit를 활용한 일직선인 공격을 구현하였고 마우스 오른쪽 버튼은 rigidbody를 통한 중력의 영향을 받는 던지는 형태의 공격을 만들었습니다.
-
-마우스 오른쪽 버튼을 누르면 날라가는 슈류탄은 OnCollisionEnter을 사용하여 충돌을 감지하면 폭발하는 이펙트가 적용되어 있습니다.
+----
 
 ### 조작법
 
 wasd 와 기본적인 방향키로 움직이며 마우스의 움직임에 따라 카메라가 회전합니다
 공격은 마우스 왼쪽으로 일직선적인 공격, 오른쪽으로 슈루탄을 던집니다.
 
-### 실행 영상
-![스크린 캡처_20230408_162743](https://user-images.githubusercontent.com/109446732/230709277-28fae9b4-03e0-4272-936a-b1aa54a54688.gif)
-![스크린 캡처_20230408_162717](https://user-images.githubusercontent.com/109446732/230709281-1fb83b67-b7f4-4d97-b9ba-0db5f2b0f47a.gif)
+----
+
+### 구현
+
+![스크린 캡처_20230519_145400](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/f48e54db-92d4-4139-bba7-93d3af36000c)
+
+#### < 이동 및 시점 >
+
+Horizontal 과 Vertical를 GetAxis함수로 받아서 w, a, s, d 와 화살표를 이용한 움직임을 구현하고 jump를 활용하여 스페이스바 입력시 주어진 값(jumpPower)
+을 y축 값에 더하여 떠오르게 만들었습니다.
+
+이때 시간이 지날수록(Time.deltaTime) 캐릭터의 y축 값을 중력 값(gravity) 만큼 지속적으로 갑소 시켜서 중력을 따로 구현하였고
+y축 값을 지면에 닿아있을때 마다 0으로 초기화 하여 떨어지는 속도가 너무 빨라지지 않도록 하였습니다.
+
+rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에는 좀더 가벼운 character controller를 활용해 보기로했습니다.
+
+연속 점프 방지를 위해 새로운 조건 값(true,false)을 추가하고 점프를 하려면 지면(CollisionFlags.Below)과 닿아있고 점프값이 비활성화 되어있어야 한다는것을 추가합니다.
+
+마우스의 입력값(Mouse X,Mouse Y)을 받아서 회전방향(vector3)을 결정하고 회전한 방향으로 물체가 회전하도록(transform.eulerAngles) 하였습니다.
+이때 Mathf 클래스의 Clamp 함수를 사용하여 상하 회전의 제한을 두어 일정범위을 넘지 않도록 설정하였습니다.
+
+게임 시작전에 카메라는 플레이어와 떨어져 있지만 플레이어 안에 빈 오브젝트를 생성하고 오브젝트의 좌표로 카메라가 이동하도록(transform.position = target.position) 하였습니다.
+
+----
+
+![스크린 캡처_20230519_145443](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/9d6f1f63-8015-47e7-9289-264fae7e3ac2)
+
+#### < 공격 >
+
+공격은 2가지 형태로 구현되어 있습니다.
+
+- 슈루탄
+
+먼저 던지는 형태의 슈루탄 공격은 마우스 오른쪽(GetMouseButtonDown(1))을 입력시 던져지며 발사위치(firePosition)는 생성 위치와 동일합니다.
+
+또한 슈루탄은 Rigidbody를 사용하여 중력의 영향을 받고 카메라의 정면(Camera.main.transform.forward)으로 일정 값의 힘을 순간적(ForceMode.Impulse)으로 적용(AddForce)받아 포물선을 그리며 나아갑니다.
+
+충돌시(OnCollisionEnter)에 제거(Destroy)되며 충돌 된 위치(transform.position)에 이펙트가 생성(Instantiate) 되게끔 하였습니다.
+
+이펙트는 오브젝트 변수를 새로 추가하고 충돌시 생성후 정해진 시간 값을 경과된 시간(Time.deltaTime) 값이 넘어갈 경우 삭제(Destroy) 되도록 설정 했습니다.
+
+- 총
+
+다음은 직선의 발사공격 이며 마우스 왼쪽 버튼(GetMouseButtonDown(0)) 입력시 카메라의 전방(Camera.main.transform.forward)으로 Ray를 생성하여 부딪힌 대상의 정보를 변수에 저장합니다.
+
+만약 Ray가 물체와 충돌한다면 플레이 될 이펙트의 위치를 충돌위치로 이동후 이펙트를 생성합니다. 이때 이펙트의 방향(forward)을 부딪힌 지점의 법선 벡터와 일치 시킵니다.
+
+----
+
+![스크린 캡처_20230519_151139](https://github.com/nimonemo434/Hunter_project_V2/assets/109446732/7763ddb3-6f14-4d21-9e64-dd97697b71ed)
+
+#### < 적 >
+
+적은 대기, 이동, 공격, 복귀, 피격, 죽음 총 6가지 상태를 자연스럽게 전환하는데에 초점을 맞추고 제작했습니다.
+
+코드의 가독성과 편의성을 위해 enum을 사용하여 상태 변수(m_State)를 만들고 시작시 설정은 대기(Idle)상태를 기본으로 하며 나머지 상태들은 switch를 활용하여 6가지 조건식으로 구현했습니다.
+
+적은 감지 범위 값을 가지고 있으며 플레이어를 감지하기 위해 변수를 받아옵니다(player = GameObject.Find("Player").transform).
+
+- 대기(Idle)
+
+가장 기본적인 상태로 별다른 액션이나 구현없이 다른 상태에서 복귀후에 적용됩니다.
+
+만약 대기(Idle) 상태중에서 정해진 범위값 안에 플레이어가 감지되면 이동(Move)으로 상태 전환합니다.
+
+- 이동(Move)
+
+플레이어를 감지하고 거리(player.position)가 공격 범위(attackDistance) 밖이라면 플레이어를 향해 이동(Move)합니다.
+
+이때 적은 캐릭터 콘트롤러(CharacterController)를 이용하여 방향(Vector3), 속도(public float moveSpeed = 5f), 시간(Time.deltaTime) 에 따라 위치가 변합니다.
+
+그러다 플레이어가 공격 범위 안에 들어오면 공격(Attack)으로 상태 전환합니다.
+
+- 공격(Attack)
+
+공격은 플레이어가 범위(attackDistance) 안에 있을때와 밖에 있을때 두가지 경우로 나누었으며 일정한 시간 간격으로 공격하기 위해 누적 시간 변수(currentTime), 공격 딜레이 변수(attackDelay)를 추가합니다.
+
+플레이어는 스크립트에 데미지 처리용 public 함수(public void DamageAction(int damage))를 추가합니다.
+
+플레이어가 공격 범위 안이라면(Vector3.Distance(transform.position, player.position) < attackDistance) 일정한 공격을 위해 경과 시간을 누적(currentTime += Time.deltaTime)하고 경과 시간이 공격 딜레이를 넘어가면(currentTime > attackDelay) 초기화(currentTime = 0)합니다.
+
+이때 공격시 플레이어의 스크립트 컴포넌트(player.GetComponent<PlayerMove>())를 가져와 안에서 함수를 구현(DamageAction(attackPower))하여 플레이어가 피해를 받습니다.
+
+이후 공격 범위를 벗어나면 플레이어를 추적할수 있도록 경과 시간을 초기화하고 이동(Move)으로 상태 전환합니다.
+
+- 복귀(Return)
+
+일정 범위 밖으로 이동시 다시 원래 자리로 돌아오기 위해 복귀(Return)으로 상태 전환합니다.
+   
+우선 처음 위치 변수(Vector3 originPos)와 이동 가능 범위 변수(public float moveDistance)를 선언하고 Start() 함수에 처음 위치 변수를 저장(originPos = transform.position)합니다.
+   
+이동 중 위치가 지정 한 범위를 넘어갈 경우 복귀하기 위해 이동(Move) 상태에서 거리를 먼저 체크(Vector3.Distance(transform.position, originPos) > moveDistance)합니다.
+   
+적은 현재위치에서 처음위치를 향해(Vector3 dir = (originPos - transform.position).normalized) 일정한 속도(moveSpeed)로 이동하다가 조건식(if)에 따라 어느정도 위치에 근접할 경우 현재위치를 처음위치로 조정(transform.position = originPos)후 대기(Idle) 상태로 전환합니다.
+   
+- 피격(Damaged)
+
+플레이어에게 공격 받으면 적은 피격(Damaged) 상태로 전환합니다. 이때 피격 모션 재생 시간을 위해 코루틴(Coroutine) 함수를 사용했습니다.
+   
+새로운 코루틴 함수(DamageProcess())를 만들고 피격(Damaged) 함수 내에서 코루틴 함수를 실행합니다.
+   
+이후 피격시 모션 재생 시간(yield return new WaitForSeconds())을 주고 이동(Move)으로 상태 전환합니다.
+   
+또한 플레이어가 적을 공격했을때 실제로 데미지를 받을수 있도록 새로운 public 함수를 만들었습니다.
+   
+이때 적의 체력을 설정하고 플레이어의 공격력은 변할수 있으므로 파라미터로 받았습니다.
+
+플레이어에게 임시 공격력 변수(weaponPower)를 주고 적을 식별하기 위한 레이어 설정했습니다.
+  
+플레이어의 스크립트에서 레이 캐스트 발시 적의 레이어를 식별하는 조건식(hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))을 만들고 적 스크립트 컴포넌트(EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>())를 가져와 데미지 실행 함수(eFSM.HitEnemy(weaponPower))를 실행하는 코드를 추가합니다.
+   
+이후 적의 체력이 0이하로 내려가면 죽음(Die)으로 상태 전환하며 적이 죽음(Die) 상태일때는 피격 이벤트 발생하지 않도록 간단한 조건문 또한 추가했습니다.
+   
+- 죽음(Die)
+   
+적의 체력이 0이하로 내려가면 죽음(Die)으로 상태 전환합니다. 이때 다른 코르틴은 모두 종료(StopAllCoroutines())하여 피격 코루틴 함수가 계속되는걸 방지하고 죽음 코루틴 함수를 활성화합니다.
+
+적은 죽음 코루틴 함수내에서 캐릭터 콘트롤러 컴포넌트(cc = GetComponent<CharacterController>())를 비활성화(cc.enabled = false)하며 2초후(yield return new WaitForSeconds(2f)) 소멸(Destroy(gameObject))합니다.
+
+----
+
+### 제작 과정 중 문제와 해결법
+
+데부분 유니티에 있는 기능들을 사용할줄 모르거나 있는줄 몰라서 생기는 문제들 이었습니다.
+강사님께 조언을 구하거나 인터넷을 통해 해결할수 있었습니다.
+
+> 시점 변환시 일정 값을 넘어가면 바닥을 내려다보는 현상(transform 컴포넌트의 특성으로 특정값을 넘어가면 자동으로 변환되면서 생기는 현상) - 마우스 회전값 변수에 입력 값을 미리 누적함으로써 해결했습니다.
+
+> 이동에서 공격으로 전환시 기다렸다가 공격하는 현상 - 공격으로 전환할때 누적 시간을 공격 딜레이 시간 부터 시작하게끔 수정(currentTime = attackDelay)
+   
+> Die() 함수에서 StopAllCoroutines() 이후 StartCoroutine(DieProcess()) 가 실행되지 않던 현상 - switch문에서 매 프레임마다 상태 함수가 실행되는걸 주석처리하여 상태 전환시 한번만 실행하도록 수정
+
+----
+
 ### 진행 상황 및 문제점
 
 현재 기본적인 움직임과 간단한 공격및 맵구현만 되어있는 상태입니다.
