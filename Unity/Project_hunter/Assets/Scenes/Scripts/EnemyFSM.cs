@@ -136,7 +136,7 @@ public class EnemyFSM : MonoBehaviour
 
     public void HitEnemy(int hitPower)
     {
-        if(m_State == EnemyState.Damaged || m_State == EnemyState.Die || m_State == EnemyState.Return)
+        if(m_State == EnemyState.Die)
         {
             return;
         }
