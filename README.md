@@ -212,6 +212,14 @@ rigidbody 사용시 자동적으로 중력 구현이 가능하지만 이번에�
    
 이후 피격시 모션 재생 시간(yield return new WaitForSeconds())을 주고 이동(Move)으로 상태 전환합니다.
    
+또한 플레이어가 적을 공격했을때 실제로 데미지를 받을수 있도록 새로운 public 함수를 만들었습니다.
+   
+이때 적의 체력을 설정하고 플레이어의 공격력은 변할수 있으므로 파라미터로 받았습니다.
+
+플레이어에게 임시 공격력 변수(weaponPower)를 주고 적을 식별하기 위한 레이어 설정했습니다.
+  
+플레이어의 스크립트에서 레이 캐스트 발시 적의 레이어를 식별하는 조건식(hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))을 만들고 적 스크립트 컴포넌트(EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>())를 가져와 데미지 실행 함수(eFSM.HitEnemy(weaponPower))를 실행하는 코드를 추가합니다.
+   
 - 죽음(Die)
 
 ----
