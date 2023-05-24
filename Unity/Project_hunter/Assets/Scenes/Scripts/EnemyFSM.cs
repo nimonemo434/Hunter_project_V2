@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyFSM : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class EnemyFSM : MonoBehaviour
     public float moveDistance = 20f;
 
     public int hp = 15;
+
+    int maxHp = 15;
+
+    public Slider hpSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +71,8 @@ public class EnemyFSM : MonoBehaviour
                 //Die();
                 break;
         }
+
+        hpSlider.value = (float)hp / (float)maxHp;
     }
 
     void Idle()
